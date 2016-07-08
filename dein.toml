@@ -42,6 +42,12 @@ repo = 'mattn/emmet-vim'
 repo = 'fuenor/im_control.vim'
 [[plugins]]
 repo = 'tpope/vim-surround'
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+[[plugins]]
+repo = 'justmao945/vim-clang'
 
 
 [[plugins]]
