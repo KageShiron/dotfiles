@@ -49,6 +49,7 @@ set incsearch       "インクリメントサーチ
 set ignorecase      "大小文字
 set smartcase       "検索を賢く
 set display=lastline "入りきらなくても@にしない
+set hlsearch
 
 colorscheme desert
 
@@ -140,7 +141,14 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+let g:neocomplcache_force_overwrite_completefunc=1
+if !exists("g:neocomplcache_force_omni_patterns")
+    let g:neocomplcache_force_omni_patterns = {}
+endif
+
+let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|::'
 """}}}
 
 " 'justmao945/vim-clang' {{{
@@ -337,10 +345,55 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)"End of vim-easymotion}}}
 
+let g:EasyMotion_use_migemo = 1
+
+"}}}
 "##### im_control.vim #####{{{
 
 
 "}}}}
-" vim: foldmethod=marker
-"
+
+
+" ------------------- clang_complete -------------
+" neocomplcacheとの競合を避けるため、自動呼び出しはOff
+let g:clang_complete_auto=1
+let g:clang_auto_select=0
+"libclangを使う
+let g:clang_use_library=1
+let g:clang_debug=1
+let g:clang_library_file="/usr/lib/libclang.so"
+let g:clang_user_options = '-std=c++11'
+
+" コマンドオプション
+let g:clang_user_options = '-std=c++11'
+
+
+" neocomplete.vim と併用して使用する場合は以下の設定も行う
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+" clang_complete では自動補完を行わない用に設定
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+" --------
+let g:syntastic_enable_sign=1
+let g:syntastic_auto_loc_list=2
+
+
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-forward)
+map m/ <Plug>(incsearch-migemo-/)
+map m? <Plug>(incsearch-migemo-?)
+
 filetype plugin indent on
+" vim: foldmethod=marker

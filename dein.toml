@@ -47,8 +47,19 @@ repo = 'Shougo/neomru.vim'
 [[plugins]]
 repo = 'Shougo/neoinclude.vim'
 [[plugins]]
-repo = 'justmao945/vim-clang'
+repo = 'Rip-Rip/clang_complete'
+[[plugins]]
+repo = 'scrooloose/syntastic'
 
 
 [[plugins]]
 repo = 'cespare/vim-toml'
+[[plugins]]
+repo = 'thinca/vim-ref'
+[[plugins]]
+repo = 'haya14busa/vim-migemo'
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+[[plugins]]
+repo = 'haya14busa/incsearch-migemo.vim'
+
