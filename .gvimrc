@@ -9,6 +9,8 @@ set columns=120
 
 
 gui
-set transparency=180
+if( has("kaoriya"))
+    set transparency=180
+end
 colorscheme desert
 set guioptions-=Tm
