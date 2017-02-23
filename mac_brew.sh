@@ -36,6 +36,11 @@ brew cask install xamarin-studio
 brew cask install android-studio
 mas install 497799835 #xcode
 
+brew tap universal-ctags/universal-ctags
+brew tap splhack/homebrew-splhack
+brew install --HEAD splhack/splhack/macvim-kaoriya
+brew install cmigemo
+
 ############
 # Tools
 ############
@@ -46,6 +51,12 @@ mas install 539883307 #line
 mas install 803453959 #slack
 mas install 410628904 #wunderlist
 mas install 784801555 #onenote
+mas install 405843582 #alfred
+brew cask install iterm2
+brew cask install sourcetree
+brew install git
+brew install bash
+
 
 ###########
 # Lang
