@@ -71,11 +71,13 @@ cd "${DOTDIR}"
 curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
+apt-get install cmigemo
+
 mkdir ~/.vim
-ln -si ./.bashrc ~/.bashrc
-ln -si ./.vimrc ~/.vimrc
-ln -si ./.gvimrc ~/.gvimrc
-ln -si ./dein.toml ~/.vim/dein.toml
+ln -si "${DOTDIR}/.bashrc" ~/.bashrc
+ln -si "${DOTDIR}/.vimrc" ~/.vimrc
+ln -si "${DOTDIR}/.gvimrc" ~/.gvimrc
+ln -si "${DOTDIR}/dein.toml" ~/.vim/dein.toml
 
 echo "[+] bootstrap.sh done!"
 
