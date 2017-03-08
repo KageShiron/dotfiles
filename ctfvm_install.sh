@@ -1,5 +1,8 @@
 #!/bin/bash
-
+if [ ${EUID:-${UID}} != 0 ]; then
+    echo "This script runs in only root"
+    exit
+fi
 # based on https://gist.github.com/K-atc/750b1da15dc42aa1f3f41a31e74a0208
 
 cd $HOME
@@ -10,7 +13,7 @@ apt-get update
 apt-get upgrade -y
 apt-get install -y vim mux gdb gdbserver socat binutils nasm python git autoconf libtool make || \
     (echo "[!] apt-get stall failed"; exit)
-apt-get install -y gvim-gtk
+apt-get install -y vim-gtk
 apt-get install -y virtualbox-guest-dkms 
 
 # ■pwnlib
