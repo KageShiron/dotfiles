@@ -3,10 +3,14 @@
 brew update
 brew upgrade
 
+
+
 brew tap caskroom/fonts
 brew tap caskroom/cask
 brew tap Homebrew/bundle
 brew install mas
+mas install 497799835 #xcode
+xcode-select --install
 
 brew cask install cakebrew
 
@@ -34,7 +38,7 @@ brew cask install visual-studio-code
 brew install neovim/neovim/neovim
 brew cask install xamarin-studio
 brew cask install android-studio
-mas install 497799835 #xcode
+brew cask install jetbrains-toolbox
 
 brew tap universal-ctags/universal-ctags
 brew tap splhack/homebrew-splhack
@@ -56,6 +60,7 @@ brew cask install iterm2
 brew cask install sourcetree
 brew install git
 brew install bash
+brew cask install firealpaca
 
 
 ###########
@@ -66,7 +71,6 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
 brew install ruby-build
 brew install rbenv-gemset
-brew install rbenv-gem-rehash
 
 brew install go
 brew install pyenv
@@ -76,6 +80,8 @@ nodebrew setup
 echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> ~/.bash_profile
 nodebrew install-binary latest
 nodebrew use stable
+
+
 
 
 ##########

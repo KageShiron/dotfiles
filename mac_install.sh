@@ -12,9 +12,15 @@ defaults write com.apple.finder AppleShowAllFiles -boolean true
 killall Finder
 
 cd "${DOTDIR}"
+curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
 # install softwares
 source "${DOTDIR}/mac_brew.sh"
+rbenv install 2.4.0
+rbenv global  2.4.0
+sudo gem install bundler
+sudo gem install rails
 
 # create sym-link
 mkdir ~/.vim
