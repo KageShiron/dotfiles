@@ -7,11 +7,11 @@ pwd
 
 # ■common
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 apt-get install -y vim mux gdb gdbserver socat binutils nasm python git autoconf libtool make || \
     (echo "[!] apt-get stall failed"; exit)
 apt-get install -y gvim-gtk
-apt-get install virtualbox-guest-dkms 
+apt-get install -y virtualbox-guest-dkms 
 
 # ■pwnlib
 apt-get install -y python2.7-dev python-pip
@@ -63,6 +63,7 @@ make && make install
 
 
 # ■my
+DOTDIR="$HOME/dotfiles"
 cd "${DOTDIR}"
 curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
@@ -75,5 +76,4 @@ ln -si ./dein.toml ~/.vim/dein.toml
 
 echo "[+] bootstrap.sh done!"
 
-reboot
 
