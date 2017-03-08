@@ -60,7 +60,20 @@ sed -i '783a\int res=dwarf_producer_init(flags,dwarfWriteSectionCallback,dwarfEr
 sed -i 's/\($(AM_V_CCLD).*\)/\1 $(lebtest_LDFLAGS)/' tests/code/Makefile
 make && make install
 
-chown vagrant:vagrant -R $HOME
+
+
+# ■my
+cd "${DOTDIR}"
+curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
+mkdir ~/.vim
+ln -si ./.bashrc ~/.bashrc
+ln -si ./.vimrc ~/.vimrc
+ln -si ./.gvimrc ~/.gvimrc
+ln -si ./dein.toml ~/.vim/dein.toml
+
 echo "[+] bootstrap.sh done!"
 
 reboot
+
