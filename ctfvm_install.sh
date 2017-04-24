@@ -1,23 +1,19 @@
 #!/bin/bash
-if [ ${EUID:-${UID}} != 0 ]; then
-    echo "This script runs in only root"
-    exit
-fi
 # based on https://gist.github.com/K-atc/750b1da15dc42aa1f3f41a31e74a0208
 
 cd $HOME
 pwd
 
 # ■common
-apt-get update
-apt-get upgrade -y
-apt-get install -y vim mux gdb gdbserver socat binutils nasm python git autoconf libtool make || \
-    (echo "[!] apt-get stall failed"; exit)
-apt-get install -y vim-gtk
-apt-get install -y virtualbox-guest-dkms 
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y vim mux gdb gdbserver socat binutils nasm python git autoconf libtool make || \
+    (echo "[!] sudo apt-get stall failed"; exit)
+sudo apt-get install -y vim-gtk
+sudo apt-get install -y virtualbox-guest-dkms 
 
 # ■pwnlib
-apt-get install -y python2.7-dev python-pip
+sudo apt-get install -y python2.7-dev python-pip
 pip install pwntools
  
 # ■peda
@@ -43,8 +39,8 @@ chmod +x disas-seccomp-filter && mv disas-seccomp-filter /usr/local/bin
  
 # ■libheap
 cd $HOME
-apt-get install -y libc6-dbg || \
-    (echo "[!] apt-get install failed"; exit)
+sudo apt-get install -y libc6-dbg || \
+    (echo "[!] sudo apt-get install failed"; exit)
 wget -q http://pastebin.com/raw/8Mx8A1zG -O libheap.py
 echo 'from .libheap import *' > __init__.py
 mkdir -p /usr/local/lib/python3.4/dist-packages/libheap/
@@ -53,7 +49,7 @@ echo -e 'define heap\n  python from libheap import *\nend' >> $HOME/.gdbinit
  
 # ■katana
 cd $HOME
-apt-get -y install libelf-dev libdwarf-dev libunwind8-dev libreadline-dev bison flex g++
+sudo apt-get -y install libelf-dev libdwarf-dev libunwind8-dev libreadline-dev bison flex g++
 git clone git://git.savannah.nongnu.org/katana.git && cd katana
 ls /usr/bin/aclocal-1.15 || ln -s /usr/bin/aclocal-1.14 /usr/bin/aclocal-1.15
 ls /usr/bin/automake-1.15 || ln -s /usr/bin/automake-1.14 /usr/bin/automake-1.15
@@ -71,7 +67,7 @@ cd "${DOTDIR}"
 curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
-apt-get install cmigemo
+sudo apt-get install -y cmigemo fonts-ricty-diminished
 
 mkdir ~/.vim
 ln -si "${DOTDIR}/.bashrc" ~/.bashrc
