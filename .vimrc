@@ -50,6 +50,7 @@ set ignorecase      "大小文字
 set smartcase       "検索を賢く
 set display=lastline "入りきらなくても@にしない
 set hlsearch
+au BufNewFile,BufRead *.nas setf nasm
 
 colorscheme desert
 
@@ -203,6 +204,7 @@ let g:lightline = {
       \ 'active' : {
       \ 'left' : [['mode','paste','jpmode'],['readonly','filename','modified']]
       \},
+      \ 'inactive' : { 'left' : [['readonly','filename','modified']] },
       \ 'subseparator' : {'left' : '>' , 'right' : '<'}
       \}
 
