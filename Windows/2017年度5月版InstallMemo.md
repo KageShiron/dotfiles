@@ -55,3 +55,5 @@ dotfilesに設定も同期するようにしたい
 # font
 backup/fontにMeiryoKeがある
 
+# Windows
+開発者モード有効化、BoW有効化
