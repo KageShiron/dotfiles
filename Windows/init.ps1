@@ -1,3 +1,4 @@
+
 if ( -not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
             [Security.Principal.WindowsBuiltInRole] "Administrator")) {
     echo "Please run as an admin.";
@@ -11,7 +12,8 @@ Install-Module posh-git
 if ( -not (Get-Command "choco" -errorAction SilentlyContinue)) {
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
-cinst -y packages.config
+
+cinst -y $args[0]
 cup -y all
 
 # load cert for ruby
@@ -20,7 +22,7 @@ if ( -not (Test-Path ~/.ssl/cacert.pem) ) {
     [Environment]::SetEnvironmentVariable('SSL_CERT_FILE', ($env:userprofile + ''), 'User')
 }
 
-npm install -g typescript typings webpack react react-dom babel-loader babel-core vue-cli
+yarn global install -g typescript typings webpack react react-dom babel-loader babel-core vue-cli
 gem install rubygems-update --source http://rubygems.org/
 update_rubygems
 gem install bundle jekyll
@@ -28,6 +30,7 @@ gem install bundle jekyll
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
+if ( -not (Test-Path c:\app )) { mkdir "c:/app" }
 if ( -not ( Test-Path ~/.vimrc )) { cmd /c (("mklink `"%userprofile%/.vimrc`" `"") + (Resolve-Path ../.vimrc).Path + "`"") }
 if ( -not ( Test-Path ~/.gvimrc )) { cmd /c (("mklink `"%userprofile%/.gvimrc`" `"") + (Resolve-Path ../.gvimrc).Path + "`"") }
 if ( -not ( Test-Path ~/.ssh )) { cmd /c "mklink /d `"%userprofile%/.ssh`" `"c:/gd/sync/ssh`"" }
