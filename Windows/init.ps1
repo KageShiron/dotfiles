@@ -32,6 +32,7 @@ if ( -not ( Test-Path ~/.gvimrc )) {
 if ( -not ( Test-Path ~/.ssh )) { cmd /c "mklink /d `"%userprofile%/.ssh`" `"c:/gd/sync/ssh`"" }
 if ( -not ( Test-Path ~/.vim )) { mkdir ~/.vim }
 if ( -not ( Test-Path "c:/app" )) { mkdir "c:/app" }
+if ( -not ( Test-Path "c:/app/vim" )) { mkdir "c:/app/vim" }
 if ( -not ( Test-Path ~/.vim/dein.toml ) ) {
     cmd /c (("mklink `"%userprofile%/.vim/dein.toml`" `"") + (Resolve-Path ../dein.toml).Path + "`"") 
 }
@@ -44,13 +45,9 @@ $path2 = [Environment]::GetEnvironmentVariable('PATH', 'User')
 $env:path = $path + ";" + $path2;
 
 $gopath = go env GOPATH
-if ( -not $path.contains($gopath) ) {
-    $path += ';' + $gopath + "\\bin";
-}
-[Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
-$env:path = $path + ";" + $path2
+AddPath($gopath);
 
-yarn global add -g typescript typings webpack react react-dom babel-loader babel-core vue-cli
+yarn global add -g typescript webpack vue-cli
 gem install rubygems-update --source http://rubygems.org/
 update_rubygems
 gem install --conservative bundle jekyll
@@ -58,9 +55,19 @@ gem install --conservative bundle jekyll
 go get github.com/mattn/sudo
 go get github.com/mattn/goemon/cmd/goemon
 go get github.com/koron/netupvim
-cd c:/app
+cd c:/app/vim
 netupvim
+AddPath("c:/app/vim");
 
 tlmgr update --self —all
 tlmgr install collection-langjapanese collection-luatex collection-latexextra minted latexmk
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+function AddPath( $addpath ) {
+    $addpath = (Resolve-Path $addpath).Path
+    if ( -not $path.contains($addpath) ) {
+        $path += ';' + $addpath + "\\bin";
+    }
+    [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
+    $env:path = $path + ";" + $path2
+}
