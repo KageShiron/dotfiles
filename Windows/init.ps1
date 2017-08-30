@@ -64,9 +64,11 @@ tlmgr install collection-langjapanese collection-luatex collection-latexextra mi
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
 function AddPath( $addpath ) {
+    $path = [Environment]::GetEnvironmentVariable('PATH', 'Machine')
+    $path2 = [Environment]::GetEnvironmentVariable('PATH', 'User')
     $addpath = (Resolve-Path $addpath).Path
     if ( -not $path.contains($addpath) ) {
-        $path += ';' + $addpath + "\\bin";
+        $path += ';' + $addpath;
     }
     [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
     $env:path = $path + ";" + $path2
