@@ -1,24 +1,28 @@
-#Include IME.ahk;
-vk1Csc079 & q:: Send,{!}
-vk1Csc079 & w:: Send,@
-vk1Csc079 & e:: Send,{#}
-vk1Csc079 & r:: Send,$
-vk1Csc079 & t:: Send,`%
-vk1Csc079 & y:: Send,{^}
-vk1Csc079 & u:: Send,&
-vk1Csc079 & i:: Send,*
-vk1Csc079 & o:: Send,(
-vk1Csc079 & p:: Send,)
-vk1Csc079 & a:: Send,{Tab}
-vk1Csc079 & s:: Send,{{}
-vk1Csc079 & d:: Send,{}}
-vk1Csc079 & f:: Send,{Esc}
-vk1Csc079 & g:: IME_SET(0)
-vk1Csc079 & h:: IME_SET(1)
-vk1Csc079 & z:: Send,\
-vk1Csc079 & x:: Send,~
-vk1Csc079 & i:: Send, {Up}
-vk1Csc079 & k:: Send, {Down}
-vk1Csc079 & j:: Send, {Left}
-vk1Csc079 & l:: Send, {Right}
-vk1Csc079 & {BackSpace}:: Send, {Delete}
+#Include %A_ScriptDir%
+#Include IME.ahk
+AppsKey::MButton
+F24 & q:: Send, {!}
+F24 & w:: Send,@
+F24 & e:: Send,{#}
+F24 & r:: Send,$
+F24 & t:: Send,`%
+F24 & y:: Send,{^}
+F24 & u:: Send,&
+F24 & i:: Send,*
+F24 & o:: Send,(
+F24 & p:: Send,)
+F24 & a:: Send,{Tab}
+F24 & s:: Send,{{}
+F24 & d:: Send,{}}
+F24 & f:: Send,{Esc}
+F24 & g:: 
+IME_SET(0)
+return
+F24 & z:: Send,\
+F24 & x:: Send,~
+F24 & h::AltTab
+F24 & j::Up
+F24 & k:: Send, {Down}
+F24 & l:: Send, {Right}
+F24 & BS:: Send, {Del}
+
