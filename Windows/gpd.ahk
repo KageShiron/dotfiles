@@ -1,5 +1,19 @@
 #Include %A_ScriptDir%
 #Include IME.ahk
+
+get_modifiers() {
+	modifiers := ""
+	if GetKeyState("Ctrl", "P")
+		modifiers = %modifiers%^
+	if GetKeyState("Shift", "P")
+		modifiers = %modifiers%+
+	if GetKeyState("Alt", "P")
+		modifiers = %modifiers%!
+	if GetKeyState("Win", "P")
+		modifiers = %modifiers%`#
+	return %modifiers%
+}
+
 AppsKey::MButton
 F24 & q:: Send, {!}
 F24 & w:: Send,@
@@ -11,7 +25,10 @@ F24 & u:: Send,&
 F24 & i:: Send,*
 F24 & o:: Send,(
 F24 & p:: Send,)
-F24 & a:: Send,{Tab}
+F24 & a::
+    modifiers := get_modifiers()
+    Send, %modifiers%{Tab}
+    return
 F24 & s:: Send,{{}
 F24 & d:: Send,{}}
 F24 & f:: Send,{Esc}
@@ -20,9 +37,22 @@ IME_SET(0)
 return
 F24 & z:: Send,\
 F24 & x:: Send,~
-F24 & h::AltTab
-F24 & j::Up
-F24 & k:: Send, {Down}
-F24 & l:: Send, {Right}
+F24 & h::
+    modifiers := get_modifiers()
+    Send, %modifiers%{Left}
+    return
+F24 & j::
+    modifiers := get_modifiers()
+    Send, %modifiers%{Up}
+    return
+F24 & k::
+    modifiers := get_modifiers()
+    Send, %modifiers%{Down}
+    return
+F24 & l::
+    modifiers := get_modifiers()
+    Send, %modifiers%{Left}
+    return
+
 F24 & BS:: Send, {Del}
 
