@@ -31,10 +31,8 @@ F24 & a::
     return
 F24 & s:: Send,{{}
 F24 & d:: Send,{}}
-F24 & f:: Send,{Esc}
-F24 & g:: 
-IME_SET(0)
-return
+F24 & f:: IME_SET(0)
+F24 & g:: IME_SET(1)
 F24 & z:: Send,\
 F24 & x:: Send,~
 F24 & h::
