@@ -96,8 +96,8 @@ refreshenv
 go get github.com/mattn/sudo
 
 ##### STEP4 Make links #####
-rm "C:/tools/cmder/config/ConEmu.xml";
-cmd /c ("mklink `"C:/tools/cmder/config/ConEmu.xml`" `"$PSScriptRoot/ConEmu.xml`"")
+rm "C:/tools/cmder/config/user-ConEmu.xml";
+cp "$PSScriptRoot/user-ConEmu.xml" "C:/tools/cmder/config/user-ConEmu.xml"
 
 rm  "C:/tools/cmder/config/user-profile.ps1";
 cmd /c ("mklink `"C:/tools/cmder/config/user-profile.ps1`" `"$PSScriptRoot/user-profile.ps1`"")
