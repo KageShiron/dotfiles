@@ -1,3 +1,17 @@
+
+function AddPath( $addpath ) {
+    $path = [Environment]::GetEnvironmentVariable('PATH', 'Machine')
+    $path2 = [Environment]::GetEnvironmentVariable('PATH', 'User')
+    $addpath = (Resolve-Path $addpath).Path
+    if ( -not $path.contains($addpath) ) {
+        $path += ';' + $addpath;
+    }
+    [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
+    $env:path = $path + ";" + $path2
+}
+
+
+
 ##### STEP1 privilege and policy #####
 if ( -not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
     [Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -51,23 +65,29 @@ $removeapp = @(
     "king.com.CandyCrushSodaSaga"
 );
 
-Get-AppxPackage | where { -not $_.IsFramework -and $_.SignatureKind -eq "Store" -and $_.Name -in $removeapp -and $_.Name -neq "Microsoft.Store" }
+Get-AppxPackage | where { -not $_.IsFramework -and $_.SignatureKind -eq "Store" -and $_.Name -in $removeapp -and $_.Name -ne "Microsoft.Store" } `
+                | Remove-AppxPackage
 
-Install-PackageProvider nuget -Force
-Install-PackageProvider psl -Force
 
-##### STEP4 Install Packages #####
+##### STEP3 Install Packages #####
+Install-PackageProvider nuget
+Install-PackageProvider psl
 
 # posh-git
 Install-Module posh-git
-Install-Module PSReadLine
 
 # chocolatey
+[Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\ca", 'User')
+[Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\ca", 'Machine')
+$env:ChocolateyInstall = "c:\ca"
+echo $env:ChocolateyInstall\lib\
 if ( -not (Get-Command "choco" -errorAction SilentlyContinue)) {
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
+C:\ca\bin\RefreshEnv.cmd
 cup -y all
 cinst -y packages.config
+C:\ca\bin\RefreshEnv.cmd
 
 # go
 $gopath = go env GOPATH
@@ -75,10 +95,13 @@ AddPath($gopath);
 refreshenv
 go get github.com/mattn/sudo
 
-##### STEP5 Make links #####
-if ( -not ( Test-Path "C:/tools/cmder/vendor/conemu-maximus5") ) {  
-    cmd /c ("mklink `"C:/tools/cmder/vendor/conemu-maximus5`" `"$PSScriptRoot/ConEmu.xml`"")
-}
+##### STEP4 Make links #####
+rm "C:/tools/cmder/config/ConEmu.xml";
+cmd /c ("mklink `"C:/tools/cmder/config/ConEmu.xml`" `"$PSScriptRoot/ConEmu.xml`"")
+
+rm  "C:/tools/cmder/config/user-profile.ps1";
+cmd /c ("mklink `"C:/tools/cmder/config/user-profile.ps1`" `"$PSScriptRoot/user-profile.ps1`"")
+
 
 
 
