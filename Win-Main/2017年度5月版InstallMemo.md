@@ -5,16 +5,13 @@
 
 # インストール
 * BZ
-* Vim-kaoriya
 * ClipMM
-* ProcessWalker Express
 * FireAlpaca
 * ProcessWalker
 * JustDecompile
 * Immunity Debugger
-* MediBang Paint Pro
+* MediBang Paint Pro    
 * Surface Home Buttonドライバ
-* うさみみ
 * EaseUS
 * EPSONのユーティリティ
 
