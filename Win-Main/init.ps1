@@ -130,7 +130,7 @@ $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
 if( -not (test-path $conemu)){ rm $conemu };
 cp "$PSScriptRoot/user-ConEmu.xml" $conemu
 
-$prof = "$env:USERPROFILE\Documents\WindowsPowerShell\profile.ps1";
+$prof = "C:\tools\cmder\config\user-profile.ps1";
 if( -not (test-path $prof) ){ rm $prof };
 cmd /c ("mklink `"$prof`" `"$PSScriptRoot/user-profile.ps1`"")
 
