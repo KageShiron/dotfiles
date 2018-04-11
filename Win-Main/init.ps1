@@ -33,7 +33,7 @@ $removeapp = @(
     "Microsoft.XboxGameOverlay",
     "Microsoft.Wallet",
     "Microsoft.BingWeather",
-    "Microsoft.MicrosoftSolitaireCollection",
+    "Microsoft.MicrosofntSolitaireCollection",
     #    "Microsoft.WindowsFeedbackHub",
     "Microsoft.XboxSpeechToTextOverlay",
     "Microsoft.OneConnect",
@@ -83,8 +83,8 @@ if ( -not (Get-Command "choco" -errorAction SilentlyContinue)) {
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 C:\a\bin\RefreshEnv.cmd
-cup -y all
-cinst -y packages.config
+cup --limitoutput --no-progress -y all
+cinst --limitoutput --no-progress -y packages.config
 C:\a\bin\RefreshEnv.cmd
 
 # mkdir
@@ -121,11 +121,17 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 ##### STEP4 Make links #####
-rm "C:/tools/cmder/config/user-ConEmu.xml";
-cp "$PSScriptRoot/user-ConEmu.xml" "C:/tools/cmder/config/user-ConEmu.xml"
+$conemu = "C:/tools/cmder/config/user-ConEmu.xml"
+if( -not test-path $conemu){ rm $conemu };
+cp "$PSScriptRoot/user-ConEmu.xml" $conemu
 
-rm  "C:/tools/cmder/config/user-profile.ps1";
-cmd /c ("mklink `"C:/tools/cmder/config/user-profile.ps1`" `"$PSScriptRoot/user-profile.ps1`"")
+$prof = "C:/tools/cmder/config/user-profile.ps1";
+if( -not test-path $prof ){ rm $prof };
+cmd /c ("mklink `"$prof`" `"$PSScriptRoot/user-profile.ps1`"")
+
+$gji = "$env:userprofile\AppData\LocalLow\Google\Google Japanese Input\config1.db";
+if( -not test-path $prof ){ rm $gji };
+cmd /c ("mklink `"$gji`" `"$PSScriptRoot/config1.db`"")
 
 function AddPath( $addpath ) {
     $path = [Environment]::GetEnvironmentVariable('PATH', 'Machine')
@@ -137,3 +143,7 @@ function AddPath( $addpath ) {
     [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
     $env:path = $path + ";" + $path2
 }
+
+##### STEP5 Registories #####
+Set-ItemProperty "HKCU:/SOFTWARE/Microsoft/Windows/CurrentVersion/Search/" "SearchboxTaskbarMode" 0
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarSmallIcons" 1
