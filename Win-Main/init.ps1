@@ -18,11 +18,10 @@ if ( -not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIden
 }
 Set-ExecutionPolicy RemoteSigned
 
-pushd
 cd c:\s\dotfiles
 git remote remove origin
 git remote add origin git@github.com:KageShiron/dotfiles
-popd
+cd c:\s\dotfiles\Win-Main
 
 ##### STEP2 Remove needless UWP #####
 $removeapp = @(
@@ -74,11 +73,11 @@ Get-AppxPackage | where { -not $_.IsFramework -and $_.SignatureKind -eq "Store" 
 
 
 ##### STEP3 Install Packages #####
-Install-PackageProvider nuget
-Install-PackageProvider psl
+Install-PackageProvider nuget -Force
+Install-PackageProvider psl -Force
 
 # posh-git
-Install-Module posh-git
+Install-Module posh-git -Force
 
 # chocolatey
 [Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\a", 'User')
@@ -122,8 +121,8 @@ netupvim
 AddPath("c:/b/vim");
 
 # win feature
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Windows-Subsystem-Linux
+Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Hyper-V-All
 
 ##### STEP4 Make links #####
 $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
