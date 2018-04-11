@@ -110,6 +110,7 @@ if ( -not ( Test-Path "C:/tools/cmder/vendor/conemu-maximus5") ) {
 }
 
 # go
+pushd
 $gopath = go env GOPATH
 AddPath($gopath);
 refreshenv
@@ -119,6 +120,7 @@ go get github.com/koron/netupvim
 cd c:/b/vim
 netupvim
 AddPath("c:/b/vim");
+popd
 
 # win feature
 Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Windows-Subsystem-Linux
