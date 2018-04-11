@@ -13,10 +13,16 @@ function AddPath( $addpath ) {
 ##### STEP1 privilege and policy #####
 if ( -not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
             [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    echo "Please run as an admin.";
+    Write-Output "Please run as an admin.";
     exit;
 }
 Set-ExecutionPolicy RemoteSigned
+
+pushd
+cd c:\s\dotfiles
+git remote remove origin
+git remote add origin git@github.com:KageShiron/dotfiles
+popd
 
 ##### STEP2 Remove needless UWP #####
 $removeapp = @(
@@ -94,7 +100,6 @@ if ( -not ( Test-Path ~/.vimrc )) {
 if ( -not ( Test-Path ~/.gvimrc )) {
     cmd /c (("mklink `"%userprofile%/.gvimrc`" `"") + (Resolve-Path ../.gvimrc).Path + "`"") 
 }
-if ( -not ( Test-Path ~/.ssh )) { cmd /c "mklink /d `"%userprofile%/.ssh`" `"c:/g/sync/ssh`"" }
 if ( -not ( Test-Path ~/.vim )) { mkdir ~/.vim }
 if ( -not ( Test-Path "c:/b" )) { mkdir "c:/b" }
 if ( -not ( Test-Path "c:/b/vim" )) { mkdir "c:/b/vim" }
@@ -122,15 +127,15 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 ##### STEP4 Make links #####
 $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
-if( -not test-path $conemu){ rm $conemu };
+if( -not (test-path $conemu)){ rm $conemu };
 cp "$PSScriptRoot/user-ConEmu.xml" $conemu
 
-$prof = "C:/tools/cmder/config/user-profile.ps1";
-if( -not test-path $prof ){ rm $prof };
+$prof = "$env:USERPROFILE\Documents\WindowsPowerShell\profile.ps1";
+if( -not (test-path $prof) ){ rm $prof };
 cmd /c ("mklink `"$prof`" `"$PSScriptRoot/user-profile.ps1`"")
 
 $gji = "$env:userprofile\AppData\LocalLow\Google\Google Japanese Input\config1.db";
-if( -not test-path $prof ){ rm $gji };
+if( -not (test-path $prof) ){ rm $gji };
 cmd /c ("mklink `"$gji`" `"$PSScriptRoot/config1.db`"")
 
 function AddPath( $addpath ) {
