@@ -93,18 +93,18 @@ cinst --limitoutput --no-progress -y packages.config
 C:\a\bin\RefreshEnv.cmd
 
 # mkdir
-if ( -not ( Test-Path ~/.vimrc )) { 
-    cmd /c (("mklink `"%userprofile%/.vimrc`" `"") + (Resolve-Path ../.vimrc).Path + "`"") 
-}
-if ( -not ( Test-Path ~/.gvimrc )) {
-    cmd /c (("mklink `"%userprofile%/.gvimrc`" `"") + (Resolve-Path ../.gvimrc).Path + "`"") 
-}
-if ( -not ( Test-Path ~/.vim )) { mkdir ~/.vim }
-if ( -not ( Test-Path "c:/b" )) { mkdir "c:/b" }
-if ( -not ( Test-Path "c:/b/vim" )) { mkdir "c:/b/vim" }
-if ( -not ( Test-Path ~/.vim/dein.toml ) ) {
-    cmd /c (("mklink `"%userprofile%/.vim/dein.toml`" `"") + (Resolve-Path ../dein.toml).Path + "`"") 
-}
+# if ( -not ( Test-Path ~/.vimrc )) { 
+#     cmd /c (("mklink `"%userprofile%/.vimrc`" `"") + (Resolve-Path ../.vimrc).Path + "`"") 
+# }
+# if ( -not ( Test-Path ~/.gvimrc )) {
+#     cmd /c (("mklink `"%userprofile%/.gvimrc`" `"") + (Resolve-Path ../.gvimrc).Path + "`"") 
+# }
+# if ( -not ( Test-Path ~/.vim )) { mkdir ~/.vim }
+# if ( -not ( Test-Path "c:/b" )) { mkdir "c:/b" }
+# if ( -not ( Test-Path "c:/b/vim" )) { mkdir "c:/b/vim" }
+# if ( -not ( Test-Path ~/.vim/dein.toml ) ) {
+#     cmd /c (("mklink `"%userprofile%/.vim/dein.toml`" `"") + (Resolve-Path ../dein.toml).Path + "`"") 
+# }
 if ( -not ( Test-Path "C:/tools/cmder/vendor/conemu-maximus5") ) {  
     cmd /c ("mklink `"C:/tools/cmder/vendor/conemu-maximus5`" `"C:/src/dotfiles/Windows/ConEmu.xml`"")
 }
@@ -116,10 +116,7 @@ AddPath($gopath);
 refreshenv
 go get github.com/mattn/sudo
 go get github.com/mattn/goemon/cmd/goemon
-go get github.com/koron/netupvim
-cd c:/b/vim
-netupvim
-AddPath("c:/b/vim");
+go get github.com/motemen/ghq
 popd
 
 # win feature
@@ -128,15 +125,15 @@ Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Hyper-V-
 
 ##### STEP4 Make links #####
 $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
-if( -not (test-path $conemu)){ rm $conemu };
+if ( -not (test-path $conemu)) { rm $conemu };
 cp "$PSScriptRoot/user-ConEmu.xml" $conemu
 
 $prof = "C:\tools\cmder\config\user-profile.ps1";
-if( -not (test-path $prof) ){ rm $prof };
+if ( -not (test-path $prof) ) { rm $prof };
 cmd /c ("mklink `"$prof`" `"$PSScriptRoot/user-profile.ps1`"")
 
 $gji = "$env:userprofile\AppData\LocalLow\Google\Google Japanese Input\config1.db";
-if( -not (test-path $prof) ){ rm $gji };
+if ( -not (test-path $prof) ) { rm $gji };
 cmd /c ("mklink `"$gji`" `"$PSScriptRoot/config1.db`"")
 
 function AddPath( $addpath ) {
