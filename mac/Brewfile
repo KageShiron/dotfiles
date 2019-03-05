@@ -1,0 +1,93 @@
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
+# First
+brew "mas"
+brew "mackup"
+brew "binutils"
+brew "coreutils"
+
+# Shell
+brew "bash"
+brew "fish"
+brew "bash-completion@2"
+brew "sshrc"
+
+brew "git"
+brew "ghq"
+brew "git-lfs"
+brew "gibo"
+brew "tig"
+brew "hub"
+
+brew "jq"
+brew "curl"
+brew "wget"
+brew "hugo"
+brew "graphbiz"
+brew "bat"
+brew "exa"
+brew "fd"
+brew "ripgrep"
+
+brew "neovim"
+brew "peco"
+brew "pre-commit"
+brew "qemu"
+brew "nmap"
+
+brew "radare2"
+brew "tor"
+brew "telnet"
+
+# Lang
+brew "python"
+brew "python3"
+brew "ruby"
+brew "go"
+brew "node"
+
+cask "font-inconsolata"
+cask "font-inconsolata-dz-for-powerline"
+cask "font-ricty-diminished"
+
+cask "bettertouchtool"
+cask "adobe-creative-cloud"
+cask "iterm2"
+cask "wireshark"
+
+cask "docker"
+cask "tunnelblick"
+cask "google-japanese-ime"
+cask 'karabiner-elements'
+cask "hyperswitch"
+
+cask "jetbrains-toolbox"
+cask "visual-studio-code"
+cask "vmawre-fusion"
+cask "virtualbox"
+cask "cyberduck"
+cask "skype"
+cask "sourcetree"
+cask "android-platform-tools"
+cask "owasp-zap"
+
+cask "firefox"
+cask "google-chrome"
+cask "torbrowser"
+
+mas "Alfred", id: 405843582
+mas "Battery Monitor", id: 836505650
+mas "BetterSnapTool", id: 417375580
+mas "CotEditor", id: 1024640650
+mas "ForkLift", id: 412448059
+mas "Hex Fiend", id: 1342896380
+mas "Keynote", id: 409183694
+mas "LINE", id: 539883307
+mas "Monosnap", id: 540348655
+mas "Numbers", id: 409203825
+mas "OneDrive", id: 823766827
+mas "Pages", id: 409201541
+mas "Slack", id: 803453959
+mas "WinArchiver Lite", id: 414855915
+mas "Xcode", id: 497799835
