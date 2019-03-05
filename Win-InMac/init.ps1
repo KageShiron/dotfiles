@@ -70,30 +70,41 @@ Get-AppxPackage | where { -not $_.IsFramework -and $_.SignatureKind -eq "Store" 
 
 
 ##### STEP3 Install Packages #####
-Install-PackageProvider nuget
-Install-PackageProvider psl
+
+
+##### STEP3 Install Packages #####
+Install-PackageProvider nuget -Force
+Install-PackageProvider psl -Force
 
 # posh-git
-Install-Module posh-git
+Install-Module posh-git -Force
 
 # chocolatey
-[Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\ca", 'User')
-[Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\ca", 'Machine')
-$env:ChocolateyInstall = "c:\ca"
+[Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\a", 'User')
+[Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\a", 'Machine')
+$env:ChocolateyInstall = "c:\a"
 echo $env:ChocolateyInstall\lib\
 if ( -not (Get-Command "choco" -errorAction SilentlyContinue)) {
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
-C:\ca\bin\RefreshEnv.cmd
-cup -y all
-cinst -y packages.config
-C:\ca\bin\RefreshEnv.cmd
+C:\a\bin\RefreshEnv.cmd
+cup --limitoutput --no-progress -y all
+cinst --limitoutput --no-progress -y packages.config
+C:\a\bin\RefreshEnv.cmd
+
 
 # go
+pushd
 $gopath = go env GOPATH
 AddPath($gopath);
 refreshenv
 go get github.com/mattn/sudo
+go get github.com/mattn/goemon/cmd/goemon
+go get github.com/koron/netupvim
+cd c:/b/vim
+netupvim
+AddPath("c:/b/vim");
+popd
 
 ##### STEP4 Make links #####
 rm "C:/tools/cmder/config/user-ConEmu.xml";
@@ -102,7 +113,9 @@ cp "$PSScriptRoot/user-ConEmu.xml" "C:/tools/cmder/config/user-ConEmu.xml"
 rm  "C:/tools/cmder/config/user-profile.ps1";
 cmd /c ("mklink `"C:/tools/cmder/config/user-profile.ps1`" `"$PSScriptRoot/user-profile.ps1`"")
 
-
+$gji = "$env:userprofile\AppData\LocalLow\Google\Google Japanese Input\config1.db";
+if( -not (test-path $prof) ){ rm $gji };
+cp "$PSScriptRoot/config1.db" "$gji"
 
 
 function AddPath( $addpath ) {
@@ -115,3 +128,8 @@ function AddPath( $addpath ) {
     [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
     $env:path = $path + ";" + $path2
 }
+##### STEP5 Registories #####
+Set-ItemProperty "HKCU:/SOFTWARE/Microsoft/Windows/CurrentVersion/Search/" "SearchboxTaskbarMode" 0
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarSmallIcons" 1
+
+
