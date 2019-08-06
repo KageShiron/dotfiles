@@ -120,8 +120,7 @@ go get github.com/motemen/ghq
 popd
 
 # win feature
-Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Hyper-V-All
+Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName @("Microsoft-Windows-Subsystem-Linux", "VirtualMachinePlatform")
 
 ##### STEP4 Make links #####
 $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
@@ -131,21 +130,6 @@ cp "$PSScriptRoot/user-ConEmu.xml" $conemu
 $prof = "C:\tools\cmder\config\user-profile.ps1";
 if ( -not (test-path $prof) ) { rm $prof };
 cmd /c ("mklink `"$prof`" `"$PSScriptRoot/user-profile.ps1`"")
-
-$gji = "$env:userprofile\AppData\LocalLow\Google\Google Japanese Input\config1.db";
-if ( -not (test-path $prof) ) { rm $gji };
-cmd /c ("mklink `"$gji`" `"$PSScriptRoot/config1.db`"")
-
-function AddPath( $addpath ) {
-    $path = [Environment]::GetEnvironmentVariable('PATH', 'Machine')
-    $path2 = [Environment]::GetEnvironmentVariable('PATH', 'User')
-    $addpath = (Resolve-Path $addpath).Path
-    if ( -not $path.contains($addpath) ) {
-        $path += ';' + $addpath;
-    }
-    [Environment]::SetEnvironmentVariable('PATH', $path, 'Machine')
-    $env:path = $path + ";" + $path2
-}
 
 ##### STEP5 Registories #####
 Set-ItemProperty "HKCU:/SOFTWARE/Microsoft/Windows/CurrentVersion/Search/" "SearchboxTaskbarMode" 0
