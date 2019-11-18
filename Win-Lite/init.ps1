@@ -110,18 +110,15 @@ Refresh
 # if ( -not ( Test-Path ~/.vim/dein.toml ) ) {
 #     cmd /c (("mklink `"%userprofile%/.vim/dein.toml`" `"") + (Resolve-Path ../dein.toml).Path + "`"") 
 # }
-if ( -not ( Test-Path "C:/tools/cmder/vendor/conemu-maximus5") ) {  
-    cmd /c ("mklink `"C:/tools/cmder/vendor/conemu-maximus5`" `"C:/src/dotfiles/Windows/ConEmu.xml`"")
-}
+# if ( -not ( TesC:/tools/cmder/vendor/conemu-maximust-Path "C:/tools/cmder/vendor/conemu-maximus5") ) {  
+    # cmd /c ("mklink `"C:/tools/cmder/vendor/conemu-maximus5`" `"C:/src/dotfiles/Windows/ConEmu.xml`"")
+# }
 
 # go
-pushd
-$gopath = go env GOPATH
-AddPath($gopath);
 go get github.com/mattn/sudo
 go get github.com/mattn/goemon/cmd/goemon
 go get github.com/motemen/ghq
-popd
+
 
 # win feature
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName @("Microsoft-Windows-Subsystem-Linux", "VirtualMachinePlatform")
@@ -131,9 +128,8 @@ $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
 if ( -not (test-path $conemu)) { rm $conemu };
 New-Item -Type SymbolicLink -Path $conemu -Value .\user-ConEmu.xml
 
-$prof = "C:\tools\cmder\config\user-profile.ps1";
-if ( -not (test-path $prof) ) { rm $prof };
-New-Item -Type SymbolicLink -Path $prof -Value .\user-ConEmu.xml
+$prof = "C:\Users\nagatsuki\Documents\PowerShell\Microsoft.PowerShell_profile.ps1";
+New-Item -Type SymbolicLink -Path $prof -Value .\user-profile.ps1 -Force
 
 ##### STEP5 Registories #####
 Set-ItemProperty "HKCU:/SOFTWARE/Microsoft/Windows/CurrentVersion/Search/" "SearchboxTaskbarMode" 0
