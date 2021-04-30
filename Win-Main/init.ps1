@@ -78,6 +78,8 @@ Install-PackageProvider psl -Force
 
 # posh-git
 Install-Module posh-git -Force
+Install-Module -Name oh-my-posh
+Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
 
 # chocolatey
 [Environment]::SetEnvironmentVariable("ChocolateyInstall", "c:\a", 'User')
@@ -120,15 +122,15 @@ go get github.com/motemen/ghq
 popd
 
 # win feature
-Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature -Online -FeatureName -NoRestart Microsoft-Hyper-V-All
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart All
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart -All
 
 ##### STEP4 Make links #####
 $conemu = "C:/tools/cmder/config/user-ConEmu.xml"
 if ( -not (test-path $conemu)) { rm $conemu };
 cp "$PSScriptRoot/user-ConEmu.xml" $conemu
 
-$prof = "C:\tools\cmder\config\user-profile.ps1";
+$prof = "$env:userprofile\Documents\PowerShell\Microsoft.PowerShell_profile.ps1";
 if ( -not (test-path $prof) ) { rm $prof };
 cmd /c ("mklink `"$prof`" `"$PSScriptRoot/user-profile.ps1`"")
 
