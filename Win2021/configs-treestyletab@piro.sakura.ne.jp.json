@@ -1,0 +1,70 @@
+{
+  "animation": false,
+  "autoCollapseExpandSubtreeOnAttach": false,
+  "autoCollapseExpandSubtreeOnSelect": false,
+  "chunkedUserStyleRules0": "LnR3aXN0eXsKICBwb3NpdGlvbjphYnNvbHV0ZSAhaW1wb3J0YW50OwogIHotaW5kZXg6MTAwMDsKIHRvcDowOwogb3BhY2l0eTowOwp9Ci50d2lzdHk6aG92ZXJ7CiBvcGFjaXR5OjE7Cn0KLmNsb3NlYm94ewpkaXNwbGF5Om5vbmU7Cn0KCi5sYWJlbHsKd2hpdGUtc3BhY2U6IG5vcm1hbCAhaW1wb3J0YW50OwpwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50OwpwYWRkaW5nLWJvdHRvbTogMGVtICFpbXBvcnRhbnQ7Cm1heC1oZWlnaHQ6IDIuMmVtOwp9",
+  "closeParentBehaviorMode": 1,
+  "configsVersion": 24,
+  "context_bookmarkTree": false,
+  "context_closeTabOptions_closeDescendants": true,
+  "context_closeTabOptions_closeTree": true,
+  "context_collapseAll": false,
+  "context_expandAll": false,
+  "context_reloadDescendants": true,
+  "context_topLevel_closeDescendants": true,
+  "context_topLevel_closeTree": true,
+  "fakeContextMenu": true,
+  "labelOverflowStyle": "crop",
+  "lastDraggedTabs": {
+    "tabIds": [
+      618
+    ],
+    "urlsDigest": "b66735764c63fc82a1d75af7754f04cff9b26252"
+  },
+  "lastSelectedSubPanelProviderId": "tst-bookmarks-subpanel@piro.sakura.ne.jp",
+  "lastSubPanelHeight": 57,
+  "notifiedFeaturesVersion": 8,
+  "optionsExpandedGroups": [
+    "group-allConfigs"
+  ],
+  "optionsExpandedSections": [
+    "section-appearance",
+    "section-addons",
+    "section-advanced",
+    "section-contextMenu",
+    "section-debug"
+  ],
+  "parentTabOperationBehaviorMode": 1,
+  "showExpertOptions": true,
+  "sidebarScrollbarPosition": 2,
+  "syncAvailableNotified": true,
+  "syncDeviceInfo": {
+    "id": "device-1604986768507-51167",
+    "name": "Windows の Firefox",
+    "icon": "device-desktop",
+    "timestamp": 1622035896737
+  },
+  "syncDevices": {
+    "device-1604986768507-51167": {
+      "id": "device-1604986768507-51167",
+      "name": "Windows の Firefox",
+      "icon": "device-desktop",
+      "timestamp": 1622035896737
+    }
+  },
+  "syncDevicesLocalCache": {
+    "device-1604986768507-51167": {
+      "id": "device-1604986768507-51167",
+      "name": "Windows の Firefox",
+      "icon": "device-desktop",
+      "timestamp": 1622035896737
+    }
+  },
+  "syncOtherDevicesDetected": true,
+  "tabDragBehavior": 8,
+  "tabDragBehaviorShift": 13,
+  "userStyleRules": "",
+  "userStyleRulesFieldHeight": "120px",
+  "warnOnCloseTabs": false,
+  "workaroundForBug1548949DroppedTabs": ""
+}
